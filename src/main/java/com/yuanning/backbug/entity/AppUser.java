@@ -1,5 +1,6 @@
 package com.yuanning.backbug.entity;
 
+import com.yuanning.backbug.entity.messageEnum.AppUserRole;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -38,6 +40,14 @@ public class AppUser implements UserDetails {
     // default value
     private Boolean locked = false;
     private Boolean enabled = false;
+    // 负责的项目
+    @ManyToMany
+    @JoinTable(
+            name = "project_manage",
+            joinColumns = @JoinColumn(name = "appUser_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+    )
+    private Set<Project> project;
 
     public AppUser(String firstName, String lastName, String email,
                    String password, AppUserRole appUserRole) {

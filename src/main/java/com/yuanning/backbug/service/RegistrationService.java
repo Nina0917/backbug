@@ -2,9 +2,10 @@ package com.yuanning.backbug.service;
 
 import com.yuanning.backbug.email.EmailSender;
 import com.yuanning.backbug.entity.AppUser;
-import com.yuanning.backbug.entity.AppUserRole;
+
 import com.yuanning.backbug.entity.ConfirmationToken;
-import com.yuanning.backbug.entity.RegistrationRequest;
+import com.yuanning.backbug.entity.messageEnum.AppUserRole;
+import com.yuanning.backbug.entity.request.RegistrationRequest;
 import com.yuanning.backbug.exceptionHandler.MessageEnum;
 import com.yuanning.backbug.exceptionHandler.MessageUtil;
 import com.yuanning.backbug.exceptionHandler.Result;
@@ -53,7 +54,12 @@ public class RegistrationService {
         String token = result.getData();
         // 发送邮件
         String link = "http://localhost:8080/api/v1/registration/confirm?token=" + token;
-        emailSender.send(request.getEmail(),buildEmail(request.getFirstName(),link));
+        // 捕捉邮件发送不成功的信息
+        try {
+            emailSender.send(request.getEmail(),buildEmail(request.getFirstName(),link));
+        } catch (Exception e) {
+            return MessageUtil.error(MessageEnum.Email_sent_Failed.getCode(), MessageEnum.Email_sent_Failed.getMessage());
+        }
 
         return MessageUtil.success(token);
     }
@@ -87,6 +93,8 @@ public class RegistrationService {
         // enable app user
         appUserService.enableAppUser(
                 confirmationToken.getAppUser().getEmail());
+        // 删除验证email后的token
+        confirmationTokenService.deleteConfirmationToken(token);
         return "confirmed";
     }
 

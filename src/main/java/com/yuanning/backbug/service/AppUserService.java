@@ -73,4 +73,40 @@ public class AppUserService implements UserDetailsService {
     public int enableAppUser(String email) {
         return appUserRepository.enableAppUser(email);
     }
+
+    // 用户登录
+    public Result<String> signIn(AppUser appUser) {
+        // 判断数据是否为empty
+        if (appUser.getEmail().isEmpty() || appUser.getPassword().isEmpty()) {
+            return MessageUtil.error(MessageEnum.EMPTY_FIELD.getCode(), MessageEnum.EMPTY_FIELD.getMessage());
+        }
+        //repository里通过邮箱查找用户
+        Optional<AppUser> user = appUserRepository.findByEmail(appUser.getEmail());
+
+        //如果用户不存在,返回错误信息
+        if (!user.isPresent()) {
+            //throw new IllegalStateException("email already taken");
+            return MessageUtil.error(MessageEnum.User_Not_Exist.getCode(), MessageEnum.User_Not_Exist.getMessage());
+        }
+
+        // 用户存在，继续
+        // 验证密码
+        String encodedPass = user.get().getPassword();
+        boolean matches = bCryptPasswordEncoder.matches(appUser.getPassword(), encodedPass);
+        // 密码不匹配，返回错误信息
+        if (!matches) {
+            return MessageUtil.error(MessageEnum.Password_Not_Correct.getCode(), MessageEnum.Password_Not_Correct.getMessage());
+        }
+
+        // 密码匹配，查看当前用户是否已经邮箱激活账号
+        // 没有激活邮箱
+        if (!user.get().getEnabled()) {
+            return MessageUtil.error(MessageEnum.User_Not_Active.getCode(), MessageEnum.User_Not_Active.getMessage());
+        }
+
+        // 密码匹配，且用户已经被激活
+        return MessageUtil.success("success!");
+
+
+    }
 }

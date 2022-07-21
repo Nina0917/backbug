@@ -5,33 +5,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-public class Project {
+public class Ticket {
     @Id
     @SequenceGenerator(
-            name = "project_sequence",
-            sequenceName = "project_sequence",
+            name = "ticket_sequence",
+            sequenceName = "ticket_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "project_sequence"
+            generator = "ticket_sequence"
     )
     private Long id;
-    @Column(nullable = false)
-    private String name;
+    private String title;
     private String description;
-    @OneToOne
-    @JoinColumn
-    private AppUser manager;
-
-    @ManyToMany(mappedBy = "project")
-    private Set<AppUser> appUser;
-
+    private Integer time;
 
 }

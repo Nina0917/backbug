@@ -23,11 +23,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/api/v*/registration/**")
+                     // 拦截器，以后再修改
+                    //.antMatchers("/api/v*/registration/**")
+                    .antMatchers("/api/v*/**/**")
                     .permitAll()
                 .anyRequest()
                 .authenticated().and()
                 .formLogin();
+        // 将登录框关闭
+        http.formLogin().disable();
     }
 
     @Override

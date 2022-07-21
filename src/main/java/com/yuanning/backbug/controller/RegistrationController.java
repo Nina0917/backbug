@@ -1,11 +1,9 @@
 package com.yuanning.backbug.controller;
 
-import com.yuanning.backbug.entity.AppUser;
-import com.yuanning.backbug.entity.RegistrationRequest;
+import com.yuanning.backbug.entity.request.RegistrationRequest;
 import com.yuanning.backbug.exceptionHandler.Result;
 import com.yuanning.backbug.service.RegistrationService;
 import lombok.AllArgsConstructor;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

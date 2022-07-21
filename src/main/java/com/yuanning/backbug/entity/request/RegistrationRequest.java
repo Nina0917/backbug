@@ -1,4 +1,4 @@
-package com.yuanning.backbug.entity;
+package com.yuanning.backbug.entity.request;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
