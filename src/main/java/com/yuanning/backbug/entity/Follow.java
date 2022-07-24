@@ -23,7 +23,19 @@ public class Follow {
             generator = "follow_sequence"
     )
     private Long id;
-    private Long userId;
-    private Long followUserId;
+
+    @ManyToOne
+    @JoinColumn(
+            nullable = false,
+            name = "userId"
+    )
+    private AppUser user;
+
+    @ManyToOne
+    @JoinColumn(
+            nullable = false,
+            name = "followUserId"
+    )
+    private AppUser followUser;
     private LocalDateTime createdTime;
 }
