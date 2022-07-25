@@ -1,5 +1,6 @@
 package com.yuanning.backbug.controller;
 
+import com.yuanning.backbug.entity.AppUser;
 import com.yuanning.backbug.entity.Project;
 import com.yuanning.backbug.entity.request.AddProjectRequest;
 import com.yuanning.backbug.exceptionHandler.Result;
@@ -31,7 +32,13 @@ public class ProjectController {
         return projectService.getAllProjects(page, request);
     }
 
-    // @GetMapping("getAllTickets")
+    /**
+     * Get the corresponding members under the project
+     */
+    @GetMapping("getMembers")
+    public Result<List<AppUser>> getMembers(@RequestParam Long projectId) {
+        return projectService.getMembers(projectId);
+    }
 
 
 

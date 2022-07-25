@@ -16,7 +16,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -86,6 +88,19 @@ public class ProjectService {
 
         return MessageUtil.success(allByAppUser);
 
+
+    }
+
+    public Result<List<AppUser>> getMembers(Long projectId) {
+        List<Long> ids = projectManageRepository.findAppUserIdsByProjectId(projectId);
+        List<AppUser> projectMembers = new ArrayList<>();
+        if (ids == null || ids.size() == 0){
+            return MessageUtil.success(projectMembers);
+        }
+        for (Long id : ids) {
+            projectMembers.add(appUserRepository.);
+        }
+        return MessageUtil.success(projectMembers);
 
     }
 }
