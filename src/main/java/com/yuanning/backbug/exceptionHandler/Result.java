@@ -9,8 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Result<T> {
-    private Integer code; // 状态码
+    // 0 is Success
+    private String code; // 状态码
 
+    // "SUCCESS"
     private String message; // 状态描述信息
 
     private T data; // 定义为范型
@@ -19,6 +21,4 @@ public class Result<T> {
 
     }
 
-
-    // 以下 getter、setter方法省略
 }

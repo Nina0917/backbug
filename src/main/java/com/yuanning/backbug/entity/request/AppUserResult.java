@@ -1,23 +1,22 @@
 package com.yuanning.backbug.entity.request;
 
-import com.yuanning.backbug.entity.messageEnum.AppUserRole;
+import com.yuanning.backbug.entity.messageEnum.RoleType;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
 public class AppUserResult {
     private final Long id;
-    private final AppUserRole appUserRole;
     private final String email;
     private final String firstName;
     private final String lastName;
 
-    public AppUserResult(Long id, AppUserRole appUserRole, String email, String firstName, String lastName) {
+    public AppUserResult(Long id, String email, String firstName, String lastName) {
         this.id = id;
-        this.appUserRole = appUserRole;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;

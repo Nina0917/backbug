@@ -8,12 +8,11 @@ public class MessageUtil {
      */
     public static Result success(Object object) {
         Result result = new Result();
-        result.setCode(0);
+        result.setCode("0");
         result.setMessage("SUCCESS");
         if (object != null) {
             result.setData(object);
         }
-
         return result;
     }
 
@@ -30,11 +29,10 @@ public class MessageUtil {
      * @param message
      * @return
      */
-    public static Result error(Integer code, String message) {
+    public static Result error(String code, String message) {
         Result result = new Result();
         result.setCode(code);
         result.setMessage(message);
-
         return result;
     }
 

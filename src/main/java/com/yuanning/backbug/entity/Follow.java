@@ -29,13 +29,13 @@ public class Follow {
             nullable = false,
             name = "userId"
     )
-    private AppUser user;
+    private User user;
 
     @ManyToOne
     @JoinColumn(
             nullable = false,
             name = "followUserId"
     )
-    private AppUser followUser;
+    private User followUser;
     private LocalDateTime createdTime;
 }

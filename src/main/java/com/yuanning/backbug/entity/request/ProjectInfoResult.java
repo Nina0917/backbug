@@ -10,8 +10,9 @@ import lombok.*;
 @ToString
 public class ProjectInfoResult {
 
-    private final Long userId;
+    private final Long projectId;
     private final String userLastName;
+    private final String userFirstName;
     private final String projectName;
     private final String projectDescription;
 

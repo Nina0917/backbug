@@ -1,14 +1,15 @@
 package com.yuanning.backbug.service;
 
-import com.yuanning.backbug.entity.AppUser;
+import com.yuanning.backbug.entity.User;
 import com.yuanning.backbug.entity.Follow;
+import com.yuanning.backbug.exceptionHandler.BaseException;
 import com.yuanning.backbug.exceptionHandler.MessageEnum;
 import com.yuanning.backbug.exceptionHandler.MessageUtil;
 import com.yuanning.backbug.exceptionHandler.Result;
 import com.yuanning.backbug.repository.AppUserRepository;
 import com.yuanning.backbug.repository.FollowRepository;
+import com.yuanning.backbug.security.common.utils.CurrentUserUtils;
 import lombok.AllArgsConstructor;
-import net.bytebuddy.asm.Advice;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -27,13 +28,21 @@ public class FollowService {
     private final FollowRepository followRepository;
     private final AppUserRepository appUserRepository;
     private final StringRedisTemplate stringRedisTemplate;
+    private final CurrentUserUtils currentUserUtils;
 
-    public Result<String> follow(HttpServletRequest request, Long followUserId, Boolean isFollow) {
+    public Result<String> follow(Long followUserId, Boolean isFollow) {
         // 1. get current user
-        String email =  (String)request.getSession().getAttribute("email");
-        AppUser user = appUserRepository.findByEmail(email).get();
-        AppUser followUser = appUserRepository.findById(followUserId).get();
-        String key = "follows:" + user.getId();
+        User followUser = null;
+        String key = null;
+        User user = currentUserUtils.getCurrentUser();
+
+        followUser = appUserRepository.findById(followUserId).get();
+        if (followUser == null) {
+            throw new BaseException(MessageEnum.User_Not_Exist);
+        }
+
+        key = "follows:" + user.getId();
+
 
         // Determine whether to follow or unfollow
         if (isFollow) {
@@ -49,10 +58,10 @@ public class FollowService {
                 stringRedisTemplate.opsForSet().add(key,followUserId.toString());
             }
 
-
         } else {
             // unfollow request, delete follow from repository
             // query the follow according to user and followUser
+
             Long deleteId = followRepository.findByUserAndFollowUser(user, followUser).get().getId();
             // delete the record from database
             followRepository.deleteById(deleteId);
@@ -64,18 +73,17 @@ public class FollowService {
         return MessageUtil.success();
     }
 
-    public Result<List<AppUser>> getFollowing(int page, HttpServletRequest request) {
-        // get current user's email
-        String email =  (String)request.getSession().getAttribute("email");
+    public Result<List<User>> getFollowing(int page) {
+
         // get current user
-        AppUser appUser = appUserRepository.findByEmail(email).get();
+        User user = currentUserUtils.getCurrentUser();
 
         // query from the repository, get all following users
         // every page contains 5 rows
         Pageable pageable = PageRequest.of(page,5);
-        List<Follow> followingUsers = followRepository.findAllByUser(appUser, pageable);
+        List<Follow> followingUsers = followRepository.findAllByUser(user, pageable);
         // current user is not following anyone
-        List<AppUser> result = new ArrayList<>();
+        List<User> result = new ArrayList<>();
         if (followingUsers.size() == 0) {
             return MessageUtil.success(result);
         } else {
@@ -86,26 +94,24 @@ public class FollowService {
         }
     }
 
-    public Result<AppUser> getFollowingAccEmail(String email) {
-        Optional<AppUser> byEmail = appUserRepository.findByEmail(email);
+    public Result<User> getFollowingAccEmail(String email) {
+        Optional<User> byEmail = appUserRepository.findByEmail(email);
         if (byEmail.isPresent()) {
-            AppUser searchResult = byEmail.get();
+            User searchResult = byEmail.get();
             return MessageUtil.success(searchResult);
         } else {
-            return MessageUtil.error(MessageEnum.User_Not_Exist.getCode(), MessageEnum.User_Not_Exist.getMessage());
+            return MessageUtil.error(MessageEnum.User_Not_Exist.getResultCode(), MessageEnum.User_Not_Exist.getResultMsg());
         }
     }
 
-    public Result<Integer> isFollow(HttpServletRequest request, Long followUserId) {
-        // get current user's email
-        String email =  (String)request.getSession().getAttribute("email");
+    public Result<Integer> isFollow(Long followUserId) {
         // get current user
-        AppUser appUser = appUserRepository.findByEmail(email).get();
+        User user = currentUserUtils.getCurrentUser();
         // get followUser
-        AppUser followUser = appUserRepository.findById(followUserId).get();
+        User followUser = appUserRepository.findById(followUserId).get();
 
         // query in the follow table to see if the record exists
-        Optional<Follow> result = followRepository.findByUserAndFollowUser(appUser, followUser);
+        Optional<Follow> result = followRepository.findByUserAndFollowUser(user, followUser);
 
         if (result.isPresent()) {
             return MessageUtil.success(1);
@@ -114,22 +120,20 @@ public class FollowService {
         }
     }
 
-    public Result<AppUser> recomFollows(HttpServletRequest request) {
-        // get current user's email
-        String email =  (String)request.getSession().getAttribute("email");
+    public Result<List<User>> recomFollows() {
         // get current user
-        AppUser appUser = appUserRepository.findByEmail(email).get();
+        User user = currentUserUtils.getCurrentUser();
         // get current user's all following users' ids
-        Long appUserId = appUser.getId();
+        Long appUserId = user.getId();
         List<Long> followUserIds = followRepository.findFollowUserIdsByUserId(appUserId);
         for (Long id : followUserIds) {
             stringRedisTemplate.opsForSet().differenceAndStore("follows:"+id.toString(),"follows:"+appUserId, "recomdFollows:"+appUserId);
         }
         Set<String> recomdUserIds = stringRedisTemplate.opsForSet().distinctRandomMembers("recomdFollows:" + appUserId, 10);
-        List<AppUser> appUserList = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         for (String sid : recomdUserIds) {
-            appUserList.add(appUserRepository.findById(Long.parseLong(sid)).get());
+            userList.add(appUserRepository.findById(Long.parseLong(sid)).get());
         }
-        return MessageUtil.success(appUserList);
+        return MessageUtil.success(userList);
     }
 }

@@ -28,10 +28,10 @@ public class Project {
     private String description;
     @OneToOne
     @JoinColumn
-    private AppUser manager;
+    private User manager;
 
     @ManyToMany(mappedBy = "project")
-    private Set<AppUser> appUser;
+    private Set<User> user;
 
 
 }
