@@ -1,0 +1,954 @@
+{
+	"info": {
+		"_postman_id": "af8b07b9-d5b8-48f3-8785-038420fff4c9",
+		"name": "backbug",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21596836"
+	},
+	"item": [
+		{
+			"name": "AuthController",
+			"item": [
+				{
+					"name": "signIn",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"admin@123.com\",\r\n    \"password\":\"root\",\r\n    \"rememberMe\":true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX0FETUlOIiwianRpIjoiMSIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM3ODY5NTMsInN1YiI6ImFkbWluQDEyMy5jb20iLCJleHAiOjE2NjQzOTE3NTN9.0V6fFXPYK0hXYWjEYMAr1XVDd0tyFqOCE57Cfgl9PcE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "testsource",
+								"value": "testtoken",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FollowController",
+			"item": [
+				{
+					"name": "addFollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NDg1MTEsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTUzMzExfQ.eeFjzoNKu0vMfnFMsMA3IyO-BTFdiSjf-iZcmzDRDYo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/follows/add-follow?followUserId=4&isFollow=true",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"follows",
+								"add-follow"
+							],
+							"query": [
+								{
+									"key": "followUserId",
+									"value": "4"
+								},
+								{
+									"key": "isFollow",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all Following",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NDg1MTEsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTUzMzExfQ.eeFjzoNKu0vMfnFMsMA3IyO-BTFdiSjf-iZcmzDRDYo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/follows/get-all?page=0",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"follows",
+								"get-all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "searchFollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NDg1MTEsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTUzMzExfQ.eeFjzoNKu0vMfnFMsMA3IyO-BTFdiSjf-iZcmzDRDYo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/follows/get-acc-email?email=13@gmail.com",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"follows",
+								"get-acc-email"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "13@gmail.com"
+								},
+								{
+									"key": "",
+									"value": "false",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "isFollow",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NDg1MTEsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTUzMzExfQ.eeFjzoNKu0vMfnFMsMA3IyO-BTFdiSjf-iZcmzDRDYo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/follows/isFollow?followUserId=5",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"follows",
+								"isFollow"
+							],
+							"query": [
+								{
+									"key": "followUserId",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "recommend following",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NDg1MTEsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTUzMzExfQ.eeFjzoNKu0vMfnFMsMA3IyO-BTFdiSjf-iZcmzDRDYo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/follows/recomFollows",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"follows",
+								"recomFollows"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ProjectController",
+			"item": [
+				{
+					"name": "addProject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTE4NDcsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU2NjQ3fQ.tttNlPwwQ8JAhmkU6tfcTCS06-fpuqBdLlna_WDY-zo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"BackBug1\",\r\n    \"description\":\"This is a project\",\r\n    \"appUserIds\":[3,4]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/projects/add-project",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"projects",
+								"add-project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProjects",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTA0NzUsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU1Mjc1fQ.zJxklkg4QVAlKIiiT6Ioj7OtrRympWssNHbkEldhDfw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/projects/get-all-projects",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"projects",
+								"get-all-projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProjectMembers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTA0NzUsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU1Mjc1fQ.zJxklkg4QVAlKIiiT6Ioj7OtrRympWssNHbkEldhDfw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/projects/get-members?projectId=1",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"projects",
+								"get-members"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TicketController",
+			"item": [
+				{
+					"name": "addTicket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTE4NDcsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU2NjQ3fQ.tttNlPwwQ8JAhmkU6tfcTCS06-fpuqBdLlna_WDY-zo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"ticket2\",\r\n    \"description\":\"This is a ticket2\",\r\n    \"time\":2,\r\n    \"status\":0,\r\n    \"priority\":1,\r\n    \"userIds\":[2,3],\r\n    \"projectId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/tickets/add-ticket",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tickets",
+								"add-ticket"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTicket",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTE4NDcsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU2NjQ3fQ.tttNlPwwQ8JAhmkU6tfcTCS06-fpuqBdLlna_WDY-zo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/tickets/get-ticket?ticketId=1",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tickets",
+								"get-ticket"
+							],
+							"query": [
+								{
+									"key": "ticketId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTicketInfoAccProject",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX1VTRVIsUk9MRV9NQU5BR0VSIiwianRpIjoiMiIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM1NTE4NDcsInN1YiI6IjFAZ21haWwuY29tIiwiZXhwIjoxNjY0MTU2NjQ3fQ.tttNlPwwQ8JAhmkU6tfcTCS06-fpuqBdLlna_WDY-zo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/tickets/get-all?projectId=1&page=0",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"tickets",
+								"get-all"
+							],
+							"query": [
+								{
+									"key": "projectId",
+									"value": "1"
+								},
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "signup1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Nina\",\r\n    \"lastName\":\"Ma\",\r\n    \"email\":\"123@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Nina\",\r\n    \"lastName\":\"Ma\",\r\n    \"email\":\"123@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Yige\",\r\n    \"lastName\":\"Cao\",\r\n    \"email\":\"456@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Ashley\",\r\n    \"lastName\":\"Ward\",\r\n    \"email\":\"789@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup4",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Eli\",\r\n    \"lastName\":\"Jenkins\",\r\n    \"email\":\"125@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup5",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Luna\",\r\n    \"lastName\":\"Bell\",\r\n    \"email\":\"285@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup6",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Paul\",\r\n    \"lastName\":\"Patterson\",\r\n    \"email\":\"232@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup7",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Gemma\",\r\n    \"lastName\":\"Cox\",\r\n    \"email\":\"386@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup8",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Hector\",\r\n    \"lastName\":\"Evans\",\r\n    \"email\":\"593@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "signup9",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Scott\",\r\n    \"lastName\":\"Hicks\",\r\n    \"email\":\"098@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://3.99.213.164:5000/api/users/sign-up",
+							"protocol": "http",
+							"host": [
+								"3",
+								"99",
+								"213",
+								"164"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users",
+								"sign-up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUsers(Admin)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXBlIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJyb2wiOiJST0xFX0FETUlOIiwianRpIjoiMSIsImlzcyI6IlNuYWlsQ2xpbWIiLCJpYXQiOjE2NjM2MzY4MzYsInN1YiI6ImFkbWluQDEyMy5jb20iLCJleHAiOjE2NjQyNDE2MzZ9.iCpepl03E8aRMz-xkq_89htYgmH982xBU-zWVbZxMY8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"firstName\":\"Alan1\",\r\n    \"lastName\":\"Cao\",\r\n    \"email\":\"4@gmail.com\",\r\n    \"password\":\"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/api/users?pageNum=0",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "pageNum",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
